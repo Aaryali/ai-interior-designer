@@ -113,3 +113,6 @@ export interface ChatMessage {
     preservedObjects?: string[];
   };
 }
+
+export * from './project';
+

@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import { ArrowRight, Sparkles, Check, ShieldCheck, Box, Scan } from 'lucide-react';
 
 export const FinalCTA: React.FC = () => {
@@ -33,13 +34,13 @@ export const FinalCTA: React.FC = () => {
 
         {/* Main Action Buttons */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
-          <a
-            href="#interactive-demo"
+          <Link
+            href="/dashboard"
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-[#FCFBF9] hover:bg-[#EAE5DC] text-[#181716] text-sm font-medium px-8 py-4 rounded-full transition-all duration-200 shadow-xl hover:shadow-2xl active:scale-98"
           >
             <span>Start Designing</span>
             <ArrowRight className="w-4 h-4 text-[#181716]" />
-          </a>
+          </Link>
 
           <a
             href="#features"

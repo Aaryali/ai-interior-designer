@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { ArrowRight, Sparkles, Scan, Eye, Layers, Maximize2, ShieldCheck, CheckCircle2 } from 'lucide-react';
 import { HERO_DETECTIONS } from '../data/mockData';
 
@@ -40,13 +41,13 @@ export const Hero: React.FC = () => {
 
           {/* Action CTAs */}
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3.5">
-            <a
-              href="#studio"
+            <Link
+              href="/dashboard"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-[#181716] hover:bg-[#2A2725] text-[#FCFBF9] text-sm font-medium px-7 py-3.5 rounded-full transition-all duration-200 shadow-sm hover:shadow-md active:scale-98"
             >
               <span>Start Designing</span>
               <ArrowRight className="w-4 h-4 text-[#E9E4DA]" />
-            </a>
+            </Link>
 
             <a
               href="#interactive-demo"

@@ -116,24 +116,24 @@ export const Navbar: React.FC<NavbarProps> = ({ brandName = 'Forma' }) => {
             >
               Sign In
             </a>
-            <a
-              href="#studio"
+            <Link
+              href="/dashboard"
               className="group relative inline-flex items-center gap-2 bg-[#181716] hover:bg-[#2A2725] text-[#FCFBF9] text-xs font-medium px-4 py-2.5 rounded-full transition-all duration-300 shadow-sm hover:shadow-md active:scale-95"
             >
               <span>Start Designing</span>
               <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5 text-[#E9E4DA]" />
-            </a>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
           <div className="flex md:hidden items-center gap-2">
-            <a
-              href="#studio"
+            <Link
+              href="/dashboard"
               className="inline-flex items-center gap-1 bg-[#181716] text-[#FCFBF9] text-xs font-medium px-3 py-2 rounded-full"
             >
               <span>Start</span>
               <ArrowRight className="w-3 h-3" />
-            </a>
+            </Link>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               type="button"
@@ -169,14 +169,14 @@ export const Navbar: React.FC<NavbarProps> = ({ brandName = 'Forma' }) => {
               >
                 Sign In
               </a>
-              <a
-                href="#studio"
+              <Link
+                href="/dashboard"
                 onClick={() => setMobileMenuOpen(false)}
                 className="w-full text-center py-3 text-xs font-medium text-[#FCFBF9] bg-[#181716] rounded-lg flex items-center justify-center gap-2"
               >
                 <span>Start Designing</span>
                 <ArrowRight className="w-3.5 h-3.5" />
-              </a>
+              </Link>
             </div>
           </div>
         </div>
