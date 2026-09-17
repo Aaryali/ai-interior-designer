@@ -26,6 +26,14 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) =>
             Analysis complete
           </span>
         );
+      case 'Uploaded':
+      case 'Analysis pending':
+        return (
+          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-[#FCFBF9]/90 text-[#181716] border border-[#DED8CB] shadow-2xs backdrop-blur-xs">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#B88746]" />
+            {status}
+          </span>
+        );
       default:
         return (
           <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-[#FCFBF9]/90 text-[#78716C] border border-[#DED8CB] shadow-2xs backdrop-blur-xs">

@@ -10,11 +10,13 @@ import { QuickActions } from '../../components/dashboard/QuickActions';
 import { RecentProjects } from '../../components/dashboard/RecentProjects';
 import { AIInsights } from '../../components/dashboard/AIInsights';
 import { MOCK_PROJECTS, MOCK_AI_INSIGHTS } from '../../data/dashboardData';
-import { Project } from '../../types';
+import { Project, RoomType, RoomUploadResponse } from '../../types';
+import { resolveImageUrl } from '../../lib/api/config';
 
 export default function DashboardPage() {
   const router = useRouter();
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+  const [projects, setProjects] = useState<Project[]>(MOCK_PROJECTS);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [notificationBanner, setNotificationBanner] = useState<string | null>(null);
   const newDesignRef = useRef<HTMLDivElement>(null);
@@ -36,6 +38,37 @@ export default function DashboardPage() {
   const handleSampleRoomSelected = (roomName: string) => {
     setNotificationBanner(`Loaded sample: ${roomName}. Ready to explore spatial transformations.`);
     setTimeout(() => setNotificationBanner(null), 5000);
+  };
+
+  const handleRoomUploaded = (
+    roomRes: RoomUploadResponse,
+    file: File,
+    meta?: { name?: string; room_type?: string }
+  ) => {
+    const fullImageUrl = resolveImageUrl(roomRes.image_url);
+    const roomName = meta?.name || file.name.replace(/\.[^/.]+$/, '');
+    const newProject: Project = {
+      id: roomRes.room_id,
+      name: roomName,
+      roomType: (meta?.room_type as RoomType) || 'Living Room',
+      thumbnail: fullImageUrl,
+      status: 'Uploaded',
+      createdAt: new Date().toISOString(),
+      updatedAt: 'Just now',
+      notes: 'Uploaded room image awaiting computer vision analysis.'
+    };
+
+    setProjects((prev) => [newProject, ...prev]);
+    setSelectedProject(newProject);
+    setNotificationBanner(
+      `Room "${roomName}" uploaded successfully (ID: ${roomRes.room_id.slice(0, 8)}...). Status: Uploaded.`
+    );
+    setTimeout(() => setNotificationBanner(null), 6000);
+  };
+
+  const handleUploadError = (errorMessage: string) => {
+    setNotificationBanner(`Upload failed: ${errorMessage}`);
+    setTimeout(() => setNotificationBanner(null), 7000);
   };
 
   return (
@@ -64,7 +97,7 @@ export default function DashboardPage() {
             </div>
             <button
               onClick={() => setNotificationBanner(null)}
-              className="text-[#A8A29E] hover:text-[#FCFBF9] text-xs font-mono px-2 py-0.5"
+              className="text-[#A8A29E] hover:text-[#FCFBF9] text-xs font-mono px-2 py-0.5 cursor-pointer"
             >
               Dismiss
             </button>
@@ -86,9 +119,10 @@ export default function DashboardPage() {
               <NewDesignCard
                 onSampleRoomSelected={handleSampleRoomSelected}
                 onUploadInitiated={() => {
-                  setNotificationBanner('Room visual uploaded. Simulating spatial geometry analysis...');
-                  setTimeout(() => setNotificationBanner(null), 5000);
+                  setNotificationBanner('Uploading room image to Forma backend...');
                 }}
+                onRoomUploaded={handleRoomUploaded}
+                onUploadError={handleUploadError}
               />
             </div>
 
@@ -100,11 +134,13 @@ export default function DashboardPage() {
 
           {/* Recent Projects Section (with built-in Empty State tester) */}
           <RecentProjects
-            projects={MOCK_PROJECTS}
+            projects={projects}
             onNewDesignClick={handleScrollToNewDesign}
             onSelectProject={(project) => {
               setSelectedProject(project);
-              setNotificationBanner(`Selected project: ${project.name}`);
+              setNotificationBanner(
+                `Selected project: ${project.name} (${project.status})`
+              );
               setTimeout(() => setNotificationBanner(null), 4000);
             }}
           />

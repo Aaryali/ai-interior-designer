@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+
+# Pretrained weights are downloaded automatically - not committed.
+*.pt
+*.pth
+*.weights
+weights/
+
+# Generated annotated images - not committed.
+/../storage/cv-results/

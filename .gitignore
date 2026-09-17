@@ -51,3 +51,13 @@ htmlcov/
 generated_images/
 generated_videos/
 generated_360/
+
+
+# AI model weights
+yolov8n.pt
+
+# Generated/user-uploaded files
+storage/
+
+# Local AI test images
+ai/test_images/

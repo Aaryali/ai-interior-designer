@@ -3,7 +3,13 @@
  * Designed to seamlessly interface with future FastAPI backend models and PostgreSQL tables.
  */
 
-export type ProjectStatus = 'Design ready' | 'Analysis complete' | 'In progress' | 'Draft';
+export type ProjectStatus =
+  | 'Design ready'
+  | 'Analysis complete'
+  | 'In progress'
+  | 'Draft'
+  | 'Uploaded'
+  | 'Analysis pending';
 
 export type RoomType =
   | 'Living Room'

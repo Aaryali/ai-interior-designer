@@ -1,0 +1,26 @@
+# =========================================================
+# Computer Vision module dependencies (ai/)
+#
+# This module is intentionally ISOLATED from backend/requirements.txt.
+# Install into its own virtual environment:
+#
+#     cd ai
+#     python3 -m venv .venv
+#     source .venv/bin/activate        # Windows: .venv\Scripts\activate
+#     pip install -r requirements.txt
+#
+# `torch` is a dependency of `ultralytics` and is resolved automatically.
+# On a machine with an NVIDIA GPU + driver (e.g. an RTX 3050), pip
+# installs a CUDA-enabled build and Ultralytics/PyTorch will use the GPU
+# automatically. On a machine without a supported GPU, it falls back to
+# CPU transparently - no code changes required either way (see
+# ai/README.md, "GPU / CPU behavior").
+# =========================================================
+
+ultralytics==8.4.154
+opencv-python-headless==4.13.0.92
+pydantic==2.13.5
+Pillow==12.1.1
+
+# Testing
+pytest==9.1.1

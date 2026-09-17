@@ -115,4 +115,5 @@ export interface ChatMessage {
 }
 
 export * from './project';
+export * from './room';
 
